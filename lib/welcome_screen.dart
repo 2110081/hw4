@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'userapi_screen.dart';
+
+import 'screen2.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
@@ -20,7 +24,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     if (_seen) {
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new UserApiScreen()));
+        slideTransition(const UsersScreen()),
+      );
     } else {
       await prefs.setBool('seen', true);
     }
@@ -33,15 +38,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Welcome to Our App', style: TextStyle(fontSize: 24)),
+            const Text('Welcome to Our App', style: TextStyle(fontSize: 24)),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
-                      new MaterialPageRoute(builder: (context) => new UserApiScreen()));
+                    slideTransition(const UsersScreen()),
+                  );
                 },
-                child: Text('Start', style: TextStyle(fontSize: 24)),
+                child: const Text('Start', style: TextStyle(fontSize: 24)),
               ),
             ),
           ],
